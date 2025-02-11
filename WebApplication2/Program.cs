@@ -1,5 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting; //импортируют необходимые пространства имен для работы с DI и конфигурацией
+using Microsoft.Extensions.Hosting; //РёРјРїРѕСЂС‚РёСЂСѓСЋС‚ РЅРµРѕР±С…РѕРґРёРјС‹Рµ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІР° РёРјРµРЅ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ DI Рё РєРѕРЅС„РёРіСѓСЂР°С†РёРµР№
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Threading.Tasks;
@@ -11,19 +11,19 @@ namespace WebApplication2
     {
         static async Task Main(string[] args)
         {
-            using IHost host = Host.CreateDefaultBuilder(args) //метод создает и конфигурирует хост приложения
-                //регистрируем наши сервисы в контейнере DI
+            using IHost host = Host.CreateDefaultBuilder(args) //РјРµС‚РѕРґ СЃРѕР·РґР°РµС‚ Рё РєРѕРЅС„РёРіСѓСЂРёСЂСѓРµС‚ С…РѕСЃС‚ РїСЂРёР»РѕР¶РµРЅРёСЏ
+                //СЂРµРіРёСЃС‚СЂРёСЂСѓРµРј РЅР°С€Рё СЃРµСЂРІРёСЃС‹ РІ РєРѕРЅС‚РµР№РЅРµСЂРµ DI
                 .ConfigureServices((hostContext, services) =>
                 {
 
-                    services.AddSingleton<IMessageService, MessageService>(); // Регистрирует MessageService как реализацию интерфейса IMessageService
-                                                                              // AddSingleton означает, что будет создан только один экземпляр MessageService на все время жизни приложения
-                    services.AddTransient<MyApplication>();  //Регистрируем MyApplication как transient, это нужно, чтобы можно было получить экземпляр MyApplication из контейнера DI
+                    services.AddSingleton<IMessageService, MessageService>(); // Р РµРіРёСЃС‚СЂРёСЂСѓРµС‚ MessageService РєР°Рє СЂРµР°Р»РёР·Р°С†РёСЋ РёРЅС‚РµСЂС„РµР№СЃР° IMessageService
+                                                                              // AddSingleton РѕР·РЅР°С‡Р°РµС‚, С‡С‚Рѕ Р±СѓРґРµС‚ СЃРѕР·РґР°РЅ С‚РѕР»СЊРєРѕ РѕРґРёРЅ СЌРєР·РµРјРїР»СЏСЂ MessageService РЅР° РІСЃРµ РІСЂРµРјСЏ Р¶РёР·РЅРё РїСЂРёР»РѕР¶РµРЅРёСЏ
+                    services.AddTransient<MyApplication>();  //Р РµРіРёСЃС‚СЂРёСЂСѓРµРј MyApplication РєР°Рє transient, СЌС‚Рѕ РЅСѓР¶РЅРѕ, С‡С‚РѕР±С‹ РјРѕР¶РЅРѕ Р±С‹Р»Рѕ РїРѕР»СѓС‡РёС‚СЊ СЌРєР·РµРјРїР»СЏСЂ MyApplication РёР· РєРѕРЅС‚РµР№РЅРµСЂР° DI
                 })
-                .Build(); //Строит хост приложения
+                .Build(); //РЎС‚СЂРѕРёС‚ С…РѕСЃС‚ РїСЂРёР»РѕР¶РµРЅРёСЏ
 
             var app = host.Services.GetRequiredService<MyApplication>();
-            await app.RunAsync(); //Запуск приложения
+            await app.RunAsync(); //Р—Р°РїСѓСЃРє РїСЂРёР»РѕР¶РµРЅРёСЏ
         }
     }
 }
